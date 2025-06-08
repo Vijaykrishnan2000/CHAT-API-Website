@@ -1,0 +1,9 @@
+{
+  "name": "netlify-functions-project",
+  "version": "1.0.0",
+  "description": "Netlify Functions for Salesforce Proxy",
+  "main": "index.js",
+  "dependencies": {
+    "node-fetch": "^3.3.1"
+  }
+}
