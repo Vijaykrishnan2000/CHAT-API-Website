@@ -11,7 +11,7 @@ chatForm.addEventListener("submit", async (e) => {
   // Show user message
   appendMessage("You", message);
   userInput.value = "";
-
+  console.log('Script User message:'+message);
   try {
     const response = await fetch("/.netlify/functions/salesforceProxy", {
       method: "POST",
