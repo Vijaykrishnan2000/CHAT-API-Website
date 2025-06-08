@@ -32,7 +32,7 @@ exports.handler = async (event) => {
 
     const accessToken = tokenData.access_token;
     const instanceUrl = tokenData.instance_url;
-
+    console.log('Netlify User message:'+userMessage);
     const response = await fetch(`${instanceUrl}/services/apexrest/AgentAction/`, {
       method: "POST",
       headers: {
