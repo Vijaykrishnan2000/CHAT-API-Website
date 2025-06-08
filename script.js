@@ -18,7 +18,7 @@ chatForm.addEventListener("submit", async (e) => {
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ userMessage: message })
+      body: JSON.stringify({ message: message })
     });
 
     const reply = await response.text(); // or response.json() if it's JSON
