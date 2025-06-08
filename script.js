@@ -1,6 +1,7 @@
 const chatForm = document.getElementById("chat-form");
 const chatWindow = document.getElementById("chat-window");
 const userInput = document.getElementById("user-input");
+const micBtn = document.getElementById("mic-btn");
 
 chatForm.addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -36,3 +37,37 @@ function appendMessage(sender, message) {
   chatWindow.appendChild(msgDiv);
   chatWindow.scrollTop = chatWindow.scrollHeight;
 }
+
+// Voice recognition setup
+let recognition;
+if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  recognition = new SpeechRecognition();
+  recognition.lang = 'en-US';
+  recognition.interimResults = false;
+
+  micBtn.addEventListener("click", () => {
+    recognition.start();
+    micBtn.disabled = true;
+    micBtn.innerHTML = '<span>🎙️</span>';
+  });
+
+  recognition.onresult = (event) => {
+    const transcript = event.results[0][0].transcript;
+    userInput.value = transcript;
+  };
+
+  recognition.onend = () => {
+    micBtn.disabled = false;
+    micBtn.innerHTML = '<span>🎤</span>';
+  };
+
+  recognition.onerror = (event) => {
+    micBtn.disabled = false;
+    micBtn.innerHTML = '<span>🎤</span>';
+    alert('Voice recognition error: ' + event.error);
+  };
+} else {
+  micBtn.style.display = 'none'; // Hide mic if not supported
+}
+
