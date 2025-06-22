@@ -3,6 +3,10 @@ const chatWindow = document.getElementById("chat-window");
 const userInput = document.getElementById("user-input");
 const micBtn = document.getElementById("mic-btn");
 
+// Avatars
+const userAvatar = "https://cdn-icons-png.flaticon.com/512/1946/1946429.png";
+const botAvatar = "https://cdn-icons-png.flaticon.com/512/4712/4712035.png";
+
 chatForm.addEventListener("submit", async (e) => {
   e.preventDefault();
 
@@ -10,9 +14,8 @@ chatForm.addEventListener("submit", async (e) => {
   if (!message) return;
 
   // Show user message
-  appendMessage("You", message);
+  appendMessage("You", message, "user");
   userInput.value = "";
-  console.log('Script User message:'+message);
   try {
     const response = await fetch("/.netlify/functions/salesforceProxy", {
       method: "POST",
@@ -23,19 +26,33 @@ chatForm.addEventListener("submit", async (e) => {
     });
 
     const data = await response.json(); // Parse JSON response
-    console.log('Script Salesforce response:', data.agentResponse);
-    appendMessage("Salesforce", data.agentResponse);
+    appendMessage("Salesforce", data.agentResponse, "bot");
   } catch (error) {
-    console.error("Error sending message:", error);
-    appendMessage("Error", "Could not reach Salesforce.");
+    appendMessage("Error", "Could not reach Salesforce.", "bot");
   }
 });
 
-function appendMessage(sender, message) {
-  const msgDiv = document.createElement("div");
-  msgDiv.classList.add("message");
-  msgDiv.innerHTML = `<strong>${sender}:</strong> ${message}`;
-  chatWindow.appendChild(msgDiv);
+function appendMessage(sender, message, type) {
+  const row = document.createElement("div");
+  row.classList.add("message-row", type);
+
+  const avatar = document.createElement("div");
+  avatar.classList.add("avatar");
+  avatar.innerHTML = `<img src="${type === "user" ? userAvatar : botAvatar}" alt="${sender}" style="width:100%;height:100%;border-radius:50%;">`;
+
+  const bubble = document.createElement("div");
+  bubble.classList.add("message-bubble");
+  bubble.innerHTML = `<strong style="font-size:0.92em;font-weight:600;">${sender}</strong><br>${message}`;
+
+  if (type === "user") {
+    row.appendChild(bubble);
+    row.appendChild(avatar);
+  } else {
+    row.appendChild(avatar);
+    row.appendChild(bubble);
+  }
+
+  chatWindow.appendChild(row);
   chatWindow.scrollTop = chatWindow.scrollHeight;
 }
 
