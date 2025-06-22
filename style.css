@@ -190,13 +190,219 @@ button[type="submit"]:hover, #mic-btn:hover {
         width: 98vw;
         min-height: 90vh;
         padding: 0;
+        border-radius: 14px;
+    }
+    .chatbot-header {
+        padding: 14px 10px 10px 10px;
+        font-size: 1rem;
+        border-radius: 14px 14px 0 0;
+    }
+    .header-avatar {
+        width: 28px;
+        height: 28px;
     }
     .chat-window {
-        height: 60vw;
-        min-height: 220px;
-        margin: 0 2vw 12px 2vw;
+        height: 55vw;
+        min-height: 180px;
+        margin: 0 2vw 10px 2vw;
+        padding: 8px 2px 8px 2px;
+        gap: 8px;
     }
     #chat-form {
         margin: 0 2vw;
+        padding: 4px 4px;
+        gap: 4px;
+    }
+    #user-input {
+        font-size: 0.95rem;
+        padding: 8px 10px;
+    }
+    button[type="submit"], #mic-btn {
+        font-size: 1rem;
+        height: 32px;
+        min-width: 32px;
+        padding: 0 8px;
+    }
+    .avatar {
+        width: 24px;
+        height: 24px;
+    }
+    .message-bubble {
+        font-size: 0.95rem;
+        padding: 8px 10px;
+        max-width: 90vw;
+    }
+}
+
+@media (max-width: 220px) {
+    .chatbot-container {
+        width: 100vw;
+        min-height: 100vh;
+        border-radius: 0;
+        padding: 0;
+    }
+    .chatbot-header span {
+        display: none;
+    }
+    .header-avatar {
+        width: 18px;
+        height: 18px;
+    }
+    .avatar {
+        display: none;
+    }
+    .chat-window {
+        height: 60vw;
+        min-height: 60px;
+        margin: 0 1vw 4px 1vw;
+        padding: 2px 0 2px 0;
+        gap: 2px;
+    }
+    #chat-form {
+        margin: 0 1vw;
+        padding: 2px 2px;
+        gap: 2px;
+    }
+    #user-input {
+        font-size: 0.8rem;
+        padding: 4px 6px;
+    }
+    button[type="submit"], #mic-btn {
+        font-size: 0.8rem;
+        height: 20px;
+        min-width: 20px;
+        padding: 0 4px;
+    }
+    .message-bubble {
+        font-size: 0.8rem;
+        padding: 4px 6px;
+        max-width: 98vw;
+    }
+}
+
+@media (max-width: 600px) {
+    .chatbot-container {
+        width: 100vw;
+        height: 100vh;
+        min-height: 100vh;
+        border-radius: 0;
+        padding: 0;
+        box-shadow: none;
+        display: flex;
+        flex-direction: column;
+    }
+    .chatbot-header {
+        border-radius: 0;
+    }
+    .chat-window {
+        flex: 1 1 auto;
+        height: auto;
+        min-height: 0;
+        margin: 0 2vw 0 2vw;
+        padding-bottom: 8px;
+        overflow-y: auto;
+    }
+    #chat-form {
+        position: relative;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        margin: 0;
+        border-radius: 0 0 14px 14px;
+        z-index: 100;
+        box-shadow: 0 -2px 8px rgba(44, 62, 80, 0.10);
+    }
+}
+
+@media (max-width: 350px) {
+    .chatbot-header span {
+        display: none;
+    }
+    .header-avatar {
+        width: 18px;
+        height: 18px;
+    }
+    .avatar {
+        display: none;
+    }
+    .chat-window {
+        height: 40vh;
+        min-height: 60px;
+        margin: 0 1vw 4px 1vw;
+        padding: 2px 0 2px 0;
+        gap: 2px;
+    }
+    #chat-form {
+        margin: 0 1vw;
+        padding: 2px 2px;
+        gap: 2px;
+    }
+    #user-input {
+        font-size: 0.8rem;
+        padding: 4px 6px;
+    }
+    button[type="submit"], #mic-btn {
+        font-size: 0.8rem;
+        height: 22px;
+        min-width: 22px;
+        padding: 0 4px;
+    }
+    .message-bubble {
+        font-size: 0.8rem;
+        padding: 4px 6px;
+        max-width: 98vw;
+    }
+}
+
+@media (max-width: 200px), (max-height: 200px) {
+    .chatbot-container {
+        width: 100vw;
+        min-height: 100vh;
+        border-radius: 0;
+        padding: 0;
+        box-shadow: none;
+    }
+    .chatbot-header,
+    .header-avatar,
+    .avatar {
+        display: none !important;
+    }
+    .chat-window {
+        height: 60vh;
+        min-height: 40px;
+        margin: 0;
+        padding: 2px 0;
+        gap: 2px;
+        background: #fff;
+    }
+    #chat-form {
+        margin: 0;
+        padding: 2px 2px;
+        gap: 2px;
+        border-radius: 0;
+        box-shadow: none;
+        background: #fff;
+    }
+    #user-input {
+        font-size: 0.7rem;
+        padding: 2px 4px;
+        border-radius: 8px;
+        min-width: 0;
+    }
+    button[type="submit"], #mic-btn {
+        font-size: 0.7rem;
+        height: 18px;
+        min-width: 18px;
+        padding: 0 2px;
+        border-radius: 8px;
+    }
+    .message-bubble {
+        font-size: 0.7rem;
+        padding: 2px 4px;
+        max-width: 98vw;
+        border-radius: 8px;
+        background: #e3f0fc;
+        color: #222;
+        box-shadow: none;
     }
 }
