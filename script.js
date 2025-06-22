@@ -22,10 +22,9 @@ chatForm.addEventListener("submit", async (e) => {
       body: JSON.stringify({ message: message })
     });
 
-    //const reply = await response.text(); // or response.json() if it's JSON
-    console.log('Script Salesforce response:'+response); 
-    console.log('Script Salesforce response JSON:'+JSON.stringify(response)); 
-    appendMessage("Salesforce", reply);
+    const data = await response.json(); // Parse JSON response
+    console.log('Script Salesforce response:', data.agentResponse);
+    appendMessage("Salesforce", data.agentResponse);
   } catch (error) {
     console.error("Error sending message:", error);
     appendMessage("Error", "Could not reach Salesforce.");
