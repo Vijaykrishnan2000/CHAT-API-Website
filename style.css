@@ -23,6 +23,7 @@ body {
     border-radius: 5px;
     margin-bottom: 15px;
     padding: 10px;
+    padding-bottom: 20px;
     background: #fafafa;
 }
 
@@ -50,4 +51,20 @@ button[type="submit"] {
 
 button[type="submit"]:hover {
     background: #005fa3;
+}
+
+.message {
+    margin-bottom: 16px;
+    padding: 10px 12px;
+    border-radius: 6px;
+    background: #eef3fb;
+    line-height: 1.6;
+    word-break: break-word;
+}
+
+.message strong {
+    display: block;
+    margin-bottom: 4px;
+    color: #0078d7;
+    font-weight: bold;
 }
