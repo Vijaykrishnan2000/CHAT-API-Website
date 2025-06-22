@@ -23,6 +23,7 @@ chatForm.addEventListener("submit", async (e) => {
     });
 
     const reply = await response.text(); // or response.json() if it's JSON
+    console.log('Script Salesforce reply:'+reply); 
     appendMessage("Salesforce", reply);
   } catch (error) {
     console.error("Error sending message:", error);
@@ -70,4 +71,3 @@ if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
 } else {
   micBtn.style.display = 'none'; // Hide mic if not supported
 }
-
