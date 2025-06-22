@@ -8,10 +8,14 @@
 </head>
 <body>
   <div class="chatbot-container">
+    <div class="chatbot-header">
+      <img src="https://cdn-icons-png.flaticon.com/512/4712/4712035.png" alt="Bot" class="header-avatar">
+      <span>Salesforce RLM Agent</span>
+    </div>
     <div class="chat-window" id="chat-window"></div>
     <form id="chat-form">
-      <input type="text" id="user-input" placeholder="Type your message..." autocomplete="off" required />
       <button type="button" id="mic-btn" title="Speak"><span>🎤</span></button>
+      <input type="text" id="user-input" placeholder="Type your message..." autocomplete="off" required />
       <button type="submit">Send</button>
     </form>
   </div>
