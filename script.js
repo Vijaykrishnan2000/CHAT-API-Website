@@ -23,7 +23,7 @@ chatForm.addEventListener("submit", async (e) => {
     });
 
     const reply = await response.text(); // or response.json() if it's JSON
-    console.log('Script Salesforce reply:'+reply); 
+    console.log('Script Salesforce response:'+response);  
     appendMessage("Salesforce", reply);
   } catch (error) {
     console.error("Error sending message:", error);
