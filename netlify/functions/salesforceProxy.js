@@ -4,8 +4,8 @@ exports.handler = async (event) => {
   //const { userMessage } = JSON.parse(event.body);
   const { message: userMessage } = JSON.parse(event.body);
 
-  const client_id = "3MVG9dAEux2v1sLtg4lmb4zhS6Pm1WapDQ2j_fVl4AGyt1o6Xr8hU_Z7bnZLUP.FKwjGRMl4FnymNFcKdpxnE";
-  const client_secret = "85D3C163EBCE3EDA1A43B34FBDAD11082CE76414DB656B1FF177C0BF17FE7CD1";
+  const client_id = "###Replace_this_with_your_ClientID";
+  const client_secret = "###Replace_this_with_your_CleintSecret";
   const username = "###Replace_this_with_your_USER_NAME";
   const password = "###Replace_this_with_your_PASSWORD";
 
