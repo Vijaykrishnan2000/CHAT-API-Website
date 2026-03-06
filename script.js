@@ -7,6 +7,8 @@ const micBtn = document.getElementById("mic-btn");
 const userAvatar = "https://cdn-icons-png.flaticon.com/512/1946/1946429.png";
 const botAvatar = "https://cdn-icons-png.flaticon.com/512/4712/4712035.png";
 
+let sessionId = null;
+
 chatForm.addEventListener("submit", async (e) => {
   e.preventDefault();
 
@@ -22,11 +24,16 @@ chatForm.addEventListener("submit", async (e) => {
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ message: message })
+      body: JSON.stringify({ message: message, sessionId: sessionId })
     });
+    console.log("Request sent to Salesforce Proxy:", { message, sessionId });
 
     const data = await response.json(); // Parse JSON response
+    if (data.sessionId) {
+      sessionId = data.sessionId;
+    }
     appendMessage("Salesforce", data.agentResponse, "bot");
+    console.log("Response received from Salesforce Proxy:", JSON.stringify(data));
   } catch (error) {
     appendMessage("Error", "Could not reach Salesforce.", "bot");
   }
