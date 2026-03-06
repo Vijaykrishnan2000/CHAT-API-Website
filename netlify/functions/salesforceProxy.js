@@ -1,8 +1,7 @@
 const fetch = require("node-fetch");
 
 exports.handler = async (event) => {
-  //const { userMessage } = JSON.parse(event.body);
-  const { message: userMessage } = JSON.parse(event.body);
+  const { message: userMessage, sessionId } = JSON.parse(event.body); // Extract sessionId
 
   /*const client_id = "###Replace_this_with_your_ClientID";
   const client_secret = "###Replace_this_with_your_CleintSecret";
@@ -45,7 +44,7 @@ exports.handler = async (event) => {
         Authorization: `Bearer ${accessToken}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ message: userMessage }),
+      body: JSON.stringify({ message: userMessage, sessionId: sessionId }), // Include sessionId
     });
 
     const result = await response.text();
