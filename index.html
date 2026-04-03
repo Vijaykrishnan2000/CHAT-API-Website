@@ -3,62 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Agentforce + Lightning Out</title>
-
+  <title>Simple Chatbot</title>
   <link rel="stylesheet" href="style.css" />
-
-  <!-- 🔥 Lightning Out -->
-  <script src="https://agentforce-epicorg-dev-ed.develop.lightning.force.com/lightning/lightning.out.js"></script>
 </head>
-
 <body>
-
   <div class="chatbot-container">
-
-    
     <div class="chatbot-header">
-      <img src="https://cdn-icons-png.flaticon.com/512/4712/4712035.png" class="header-avatar">
-      <span>Agentforce Assistant</span>
+      <img src="https://cdn-icons-png.flaticon.com/512/4712/4712035.png" alt="Bot" class="header-avatar">
+      <span>Agentforce NTO Assistant</span>
     </div>
-
-    <!-- 🔥 NEW: LWC Container -->
-    <div id="lwcContainer" style="padding:10px;"></div>
-
-    <!-- Existing Chat -->
     <div class="chat-window" id="chat-window"></div>
-
     <form id="chat-form">
-      <button type="button" id="mic-btn"><span>🎤</span></button>
-      <input type="text" id="user-input" placeholder="Type your message..." required />
+      <button type="button" id="mic-btn" title="Speak"><span>🎤</span></button>
+      <input type="text" id="user-input" placeholder="Type your message..." autocomplete="off" required />
       <button type="submit">Send</button>
     </form>
-
   </div>
-
   <script src="script.js"></script>
-
-  <!-- 🔥 Lightning Out Loader -->
-  <script>
-    function loadLWC() {
-      $Lightning.use("c:rlmAgentApp",
-        function () {
-          $Lightning.createComponent(
-            "c:rlmAgentWrapper",
-            {},
-            "lwcContainer",
-            function () {
-              console.log("✅ LWC Loaded inside Netlify site");
-            }
-          );
-        },
-        "https://agentforce-epicorg-dev-ed.develop.lightning.force.com"
-      );
-    }
-
-    window.onload = function () {
-      loadLWC();
-    };
-  </script>
-
 </body>
 </html>
