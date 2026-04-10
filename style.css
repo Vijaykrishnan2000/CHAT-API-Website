@@ -67,6 +67,34 @@ body {
     align-items: center;
 }
 
+.input-controls {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+}
+
+#imageUpload {
+    display: none;
+}
+
+#imageUpload + label {
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    background: #f6fafd;
+    transition: background 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    font-size: 16px;
+}
+
+#imageUpload + label:hover {
+    background: #e0eafc;
+}
+
 #user-input {
     flex: 1;
     padding: 12px 16px;

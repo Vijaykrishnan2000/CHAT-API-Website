@@ -14,7 +14,11 @@
     </div>
     <div class="chat-window" id="chat-window"></div>
     <form id="chat-form">
-      <button type="button" id="mic-btn" title="Speak"><span>🎤</span></button>
+      <div class="input-controls">
+        <button type="button" id="mic-btn" title="Speak"><span>🎤</span></button>
+        <input type="file" id="imageUpload" accept=".jpg,.jpeg,.png" title="Upload image" />
+        <label for="imageUpload" title="Upload image">📎</label>
+      </div>
       <input type="text" id="user-input" placeholder="Type your message..." autocomplete="off" required />
       <button type="submit">Send</button>
     </form>
