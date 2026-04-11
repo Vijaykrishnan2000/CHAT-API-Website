@@ -24,41 +24,73 @@ imageUpload.addEventListener("change", function () {
       const imagePreview = `<div style="margin-top: 8px;"><img src="${reader.result}" alt="${fileName}" style="max-width: 200px; max-height: 150px; border-radius: 8px; border: 1px solid #e3eaf5;"></div>`;
       appendMessage("You", `Image added: ${fileName}${imagePreview}`, "user");
       console.log("Image loaded:", fileName);
+
+      // Immediately upload the image to Salesforce
+      uploadImageToSalesforce();
     };
     reader.readAsDataURL(file);
   }
 });
 
-chatForm.addEventListener("submit", async (e) => {
-  e.preventDefault();
-
-  const message = userInput.value.trim();
-  if (!message && !base64File) return; // Require either message or image
-
-  // Show user message (only if there's text or if no image was previewed)
-  if (message) {
-    appendMessage("You", message, "user");
-  }
-  userInput.value = "";
+// Function to upload image to Salesforce
+async function uploadImageToSalesforce() {
   try {
-    // Determine which endpoint to use based on whether image is attached
-    let endpoint = "/.netlify/functions/salesforceProxy";
-    let requestPayload = { message: message, sessionId: sessionId };
+    const requestPayload = {
+      message: "",
+      sessionId: sessionId,
+      fileName: fileName,
+      fileData: base64File
+    };
 
-    if (base64File && fileName) {
-      endpoint = "/.netlify/functions/imageUpload";
-      requestPayload.fileName = fileName;
-      requestPayload.fileData = base64File;
-    }
-
-    const response = await fetch(endpoint, {
+    const response = await fetch("/.netlify/functions/imageUpload", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify(requestPayload)
     });
-    console.log("Request sent to:", endpoint, requestPayload);
+    console.log("Image upload request sent:", requestPayload);
+
+    const data = await response.json();
+    if (data.sessionId) {
+      sessionId = data.sessionId;
+    }
+    console.log("Image upload response:", JSON.stringify(data));
+
+    // Clear image data after successful upload
+    base64File = null;
+    fileName = null;
+    imageUpload.value = "";
+  } catch (error) {
+    console.error("Image upload error:", error);
+    appendMessage("Error", "Could not upload image to Salesforce.", "bot");
+  }
+}
+
+chatForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const message = userInput.value.trim();
+  if (!message) return;
+
+  // Show user message
+  appendMessage("You", message, "user");
+  userInput.value = "";
+  try {
+    // Always use salesforceProxy for text messages
+    const requestPayload = {
+      message: message,
+      sessionId: sessionId
+    };
+
+    const response = await fetch("/.netlify/functions/salesforceProxy", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(requestPayload)
+    });
+    console.log("Request sent to salesforceProxy:", requestPayload);
 
     const data = await response.json(); // Parse JSON response
     if (data.sessionId) {
@@ -66,11 +98,6 @@ chatForm.addEventListener("submit", async (e) => {
     }
     appendMessage("Salesforce", data.agentResponse, "bot");
     console.log("Response received from Salesforce Proxy:", JSON.stringify(data));
-
-    // Clear image after sending
-    base64File = null;
-    fileName = null;
-    imageUpload.value = "";
   } catch (error) {
     appendMessage("Error", "Could not reach Salesforce.", "bot");
   }
