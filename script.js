@@ -113,7 +113,15 @@ function appendMessage(sender, message, type) {
 
   const bubble = document.createElement("div");
   bubble.classList.add("message-bubble");
-  bubble.innerHTML = `<strong style="font-size:0.92em;font-weight:600;">${sender}</strong><br>${message}`;
+  
+  // Format the message: handle newlines, bold, and other markdown
+  let formattedMessage = message
+    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') // Convert **text** to <strong>
+    .replace(/\n/g, '<br>') // Convert \n to <br>
+    .replace(/\_(.*?)\_/g, '<em>$1</em>') // Convert _text_ to <em>
+    .replace(/\d+\.\s/g, (match) => `<br>${match}`); // Add line breaks before numbered items
+  
+  bubble.innerHTML = `<strong style="font-size:0.92em;font-weight:600;">${sender}</strong><br>${formattedMessage}`;
 
   if (type === "user") {
     row.appendChild(bubble);
